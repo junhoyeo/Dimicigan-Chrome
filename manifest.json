@@ -1,0 +1,14 @@
+{
+  "name": "dimicigan",
+  "version": "1.0.0",
+  "manifest_version": 2,
+  "description": "chrome extension for checking dimigo class timetablehrome extension for checking dimigo class timetable",
+  "homepage_url": "https://github.com/JunhoYeo/dimicigan-chrome",
+  "browser_action": {
+    "default_title": "디미고 시간표",
+    "default_popup": "index.html"
+  },
+  "permissions": [
+    "https://*/*"
+  ]
+}
