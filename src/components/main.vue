@@ -1,0 +1,160 @@
+<script>
+import table from './../assets/table.json'
+import time from './../assets/time.json'
+
+export default {
+  name: 'main',
+  props: {
+    grade: {
+      type: Number,
+      default: 1
+    },
+    tab: {
+      type: Number,
+      default: 1
+    }
+  },
+
+  data () {
+    return {
+      menu: {
+        breakfast: '',
+        lunch: '',
+        dinner: ''
+      },
+      table,
+      time
+    }
+  },
+
+  methods: {
+    getDimibobTitle: function () {
+      // time.meal.findIndex(
+        
+      // )
+    },
+    getDimibobContent: function () {
+      
+    }
+  }
+}
+</script>
+
+<template>
+  <div class="content">
+    <div class="table">
+      <div class="time">
+        <div class="time__subject">
+          <div class="time__subject__title">음악</div>
+          <div class="time__subject__time">제 1교시</div>
+        </div>
+        <div class="time__desc">
+          <span class="time__desc__running">09:00 ~ 09:50</span>
+          <span class="time__desc__teacher">이택주 T</span>
+        </div>
+      </div>
+      <div class="time current">
+        <div class="time__subject current">
+          <div class="time__subject__title ">음악</div>
+          <div class="time__subject__time">제 2교시</div>
+        </div>
+        <div class="time__desc current">
+          <span class="time__desc__running">10:00 ~ 10:50</span>
+          <span class="time__desc__teacher">이택주 T</span>
+        </div>
+      </div>
+      <div class="time">
+        <div class="time__subject">
+          <div class="time__subject__title">음악</div>
+          <div class="time__subject__time">제 3교시</div>
+        </div>
+        <div class="time__desc">
+          <span class="time__desc__running">11:00 ~ 11:50</span>
+          <span class="time__desc__teacher">이택주 T</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="meal">
+      <div class="meal__title">DINNER</div>
+      <div class="meal__content">고구마영양밥 | 달래양념장 | 두부된장국 | 오징어김치볶음 | 간장깻잎지 | 열무김치 | 초코후레이크씨리얼 | 우유 | 숭늉</div>
+    </div>
+  </div>
+</template>
+
+<style lang="scss" scoped>
+.table {
+  width: 100%;
+  display: table;
+
+  .time {
+    width: 100%;
+    display: table-row;
+
+    &__subject {
+      width: 30%;
+      padding: 0.5em;
+      text-align: center;
+      display: table-cell;
+      color: white;
+      background-color: rgb(236, 236, 236);
+      padding: 1em;
+
+      &__title {
+        font-size: 3em;
+        font-family: 'Black Han Sans', sans-serif;
+      }
+
+      &__time {
+        font-size: 1.5em;
+        font-family: 'Gothic A1', sans-serif;
+      }
+    }
+
+    &__desc {
+      width: 70%;
+      display: table-cell;
+      color: lightgray;
+      background-color: rgb(170, 170, 170);
+      font-family: 'Black Han Sans', sans-serif;
+      font-size: 1.7em;
+
+      span {
+        margin-top: -.8em;
+        margin-left: 0.5em;
+        margin-bottom: 0.5em;
+        display: block;
+      }
+    }
+
+    &__subject.current {
+      color: white;
+      background-color: black;
+      border: 3px solid black;
+    }
+
+    &__desc.current {
+      color: black;
+      background-color: #fb5656;
+      border: 5px solid black;
+    }
+  }
+
+  .time.current {
+    border: 5px solid black;
+  }
+}
+
+.meal {
+  padding: 0.5em;
+
+  &__title {
+    font-family: 'Black Han Sans', sans-serif;
+    font-size: 2em;    
+  }
+
+  &__content {
+    font-family: 'Gothic A1', sans-serif;
+  }
+}
+</style>
