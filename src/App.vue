@@ -8,12 +8,22 @@ export default {
     Index, 
     Settings
   },
+
+  created () {
+    let prevGrade = Number(window.localStorage.grade)
+    let prevTab = Number(window.localStorage.tab)
+
+    if (prevGrade && prevTab) {
+      this.grade = prevGrade
+      this.tab = prevTab
+    }
+  },
   
   data () {
     return {
       today: new Date().getDay() - 1,
       grade: 1,
-      tab: 5, // class
+      tab: 1, // class
       settings: false
     }
   },
@@ -21,6 +31,13 @@ export default {
   methods: {
     openSettings: function () {
       this.settings = !(this.settings)
+    },
+
+    updateSettings: function (res) {
+      this.grade = res.grade,
+      this.tab = res.tab
+      window.localStorage.setItem('grade', this.grade)
+      window.localStorage.setItem('tab', this.tab)
     }
   }
 }
@@ -37,12 +54,12 @@ export default {
       </div>
       <div class="header__info">
         <div class="header__info__date">{{ this.moment().format('YYYY년 M월 D일') }}</div>
-        <div class="header__info__class">1학년 5반</div>
+        <div class="header__info__class">{{ `${grade}학년 ${tab}반` }}</div>
         <div class="header__info__next">다음 수업 15분 뒤</div>
       </div>
     </div>
     <div class="settings" v-if="settings">
-      <Settings/>
+      <Settings :grade="grade" :tab="tab" @updated="updateSettings"/>
     </div>
     <div class="main" v-else>
       <Index :grade="grade" :tab="tab"/>

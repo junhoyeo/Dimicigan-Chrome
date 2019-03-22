@@ -1,11 +1,30 @@
 <script>
 export default {
   name: 'Settings',
+  props: {
+    grade: {
+      type: Number,
+      default: 1
+    },
+    tab: {
+      type: Number,
+      default: 1
+    }
+  },
 
   data () {
     return {
-      grade: 1,
-      tab: 1
+      newGrade: this.grade,
+      newTab: this.tab
+    }
+  },
+
+  methods: {
+    onClickUpdate: function () {
+      this.$emit('updated', {
+        grade: this.newGrade,
+        tab: this.newTab
+      })
     }
   }
 }
@@ -18,19 +37,19 @@ export default {
       <div class="info">
         <div class="info__title">학년/반 정보 설정</div>
         <input 
-          class="info__input" v-model="grade"
+          class="info__input" v-model.number="newGrade"
           type="number" min="1" max="3"
         />
         <span class="info__label grade">학년</span>
         <input 
-          class="info__input" v-model="tab"
+          class="info__input" v-model.number="newTab"
           type="number" min="1" max="6"
         />
         <span class="info__label class">반</span>
       </div>
     </div>
     <div class="button-wrap">
-      <button class="button-save">변경사항 저장</button>
+      <button class="button-update" @click="onClickUpdate">변경사항 저장</button>
     </div>
   </div>
 </template>
