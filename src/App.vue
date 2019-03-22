@@ -1,11 +1,11 @@
 <script>
-import Main from './components/main'
-import Settings from './components/settings'
+import Index from './components/Index'
+import Settings from './components/Settings'
 
 export default {
-  name: 'app',
+  name: 'App',
   components: {
-    Main, 
+    Index, 
     Settings
   },
   
@@ -45,7 +45,7 @@ export default {
       <Settings/>
     </div>
     <div class="main" v-else>
-      <Main :grade="grade" :tab="tab"/>
+      <Index :grade="grade" :tab="tab"/>
     </div>
 
     <div class="footer">

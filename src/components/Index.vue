@@ -3,7 +3,7 @@ import table from './../assets/table.json'
 import time from './../assets/time.json'
 
 export default {
-  name: 'main',
+  name: 'Index',
   props: {
     grade: {
       type: Number,

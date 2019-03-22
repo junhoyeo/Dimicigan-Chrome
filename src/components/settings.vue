@@ -1,3 +1,9 @@
+<script>
+export default {
+  name: 'Settings'
+}
+</script>
+
 <template>
   <div class="content">
     <div class="settings">
