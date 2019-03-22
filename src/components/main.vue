@@ -14,27 +14,49 @@ export default {
       default: 1
     }
   },
+  
+  created () {
+    this.getDimibob()
+  },
 
   data () {
     return {
-      menu: {
-        breakfast: '',
-        lunch: '',
-        dinner: ''
+      dimibob: {
+        breakfast: '아침 급식 정보를 불러올 수 없습니다.',
+        lunch: '점심 급식 정보를 불러올 수 없습니다.',
+        dinner: '저녁 급식 정보를 불러올 수 없습니다.',
+        music: '기상송 정보를 불러올 수 없습니다.'
       },
       table,
       time
     }
   },
 
-  methods: {
-    getDimibobTitle: function () {
-      // time.meal.findIndex(
-        
-      // )
-    },
-    getDimibobContent: function () {
+  computed: {
+    today () {
       
+    },
+    mealIndex () {
+      const current = Number(this.moment().format('HHmm'))
+      const idx = time.meal.findIndex(base => {
+        return current < base
+      })
+      return idx == -1 ? time.meal.length - 1 : idx
+    },
+    dimibobTitle () {
+      return ['BREAKFAST', 'LUNCH', 'DINNER', 'MUSIC'][this.mealIndex]
+    },
+  },
+
+  methods: {
+    getDimibob () {
+      const today = this.moment().format('YYYYMMDD')
+      this.$api.get(`https://dev-api.dimigo.in/dimibobs/${today}`)
+        .then((res) => {
+          this.dimibob.breakfast = res.data.breakfast
+          this.dimibob.lunch = res.data.lunch
+          this.dimibob.dinner = res.data.dinner
+        })
     }
   }
 }
@@ -76,8 +98,8 @@ export default {
     </div>
 
     <div class="meal">
-      <div class="meal__title">DINNER</div>
-      <div class="meal__content">고구마영양밥 | 달래양념장 | 두부된장국 | 오징어김치볶음 | 간장깻잎지 | 열무김치 | 초코후레이크씨리얼 | 우유 | 숭늉</div>
+      <div class="meal__title">{{ dimibobTitle }}</div>
+      <div class="meal__content">{{ dimibob[dimibobTitle.toLowerCase()] }}</div>
     </div>
   </div>
 </template>
