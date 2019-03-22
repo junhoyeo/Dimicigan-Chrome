@@ -1,4 +1,6 @@
 <script>
+import NumberInput from './../components/NumberInput'
+
 export default {
   name: 'Settings',
   props: {
@@ -10,6 +12,9 @@ export default {
       type: Number,
       default: 1
     }
+  },
+  components: {
+    NumberInput
   },
 
   data () {
@@ -36,15 +41,9 @@ export default {
       <div class="title">설정</div>
       <div class="info">
         <div class="info__title">학년/반 정보 설정</div>
-        <input 
-          class="info__input" v-model.number="newGrade"
-          type="number" min="1" max="3"
-        />
+        <NumberInput v-model="newGrade" type="number" max="3"/>
         <span class="info__label grade">학년</span>
-        <input 
-          class="info__input" v-model.number="newTab"
-          type="number" min="1" max="6"
-        />
+        <NumberInput v-model="newTab" max="6"/>
         <span class="info__label class">반</span>
       </div>
     </div>
@@ -72,16 +71,6 @@ export default {
   &__title {
     font-size: 1.8em;
     margin-bottom: 0.5em;
-  }
-
-  &__input {
-    font-size: 2.5em;
-    width: 1.2em;
-    border: 3.5px solid black;
-  }
-
-  &__input:focus {
-    background-color: rgb(236, 236, 236);
   }
 
   &__label {
