@@ -65,29 +65,35 @@ export default {
       const today = this.moment().format('YYYYMMDD')
       this.$api.get(`https://dev-api.dimigo.in/dimibobs/${today}`)
         .then((res) => {
-          this.dimibob.breakfast = res.data.breakfast || '아침 급식 정보를 불러올 수 없습니다.'
-          this.dimibob.lunch = res.data.lunch || '점심 급식 정보를 불러올 수 없습니다.'
-          this.dimibob.dinner = res.data.dinner || '저녁 급식 정보를 불러올 수 없습니다.'
+          this.dimibob.breakfast = res.data.breakfast || '아침 급식 정보가 없습니다.'
+          this.dimibob.lunch = res.data.lunch || '점심 급식 정보가 없습니다.'
+          this.dimibob.dinner = res.data.dinner || '저녁 급식 정보가 없습니다.'
         })
     },
 
     getTimetable () {
-      const today = ['시작'].concat(this.table[this.grade][this.tab][this.todayIndex], ['끝'])
+      const today = ['시작'].concat(
+          ([5, 6].indexOf(this.todayIndex) > -1) ? 
+            '주말' : this.table[this.grade][this.tab][this.todayIndex], 
+        ['끝'])
       for (let i = -1; i < 2; i++) {
         this.current.splice(i + 1, 1, {
-          idx: this.timeIndex + i + 1,
+          idx: this.timeIndex + i,
           subject: today[this.timeIndex + i],
           start: this.moment(
               this.time.table[this.timeIndex + i - 1], 
-              'HHmm'
+              'Hmm'
             ).subtract(50, 'minutes'),
-          end: this.moment(this.time.table[this.timeIndex + i - 1], 'HHmm')
+          end: this.moment(this.time.table[this.timeIndex + i - 1], 'Hmm')
         })
       }
     },
     
     getTimePeriod(lecture) {
-      if (lecture.start.isValid()) 
+      if ([5, 6].indexOf(this.todayIndex) > -1) {
+        return '신나는 주말!'
+      }
+      else if (lecture.start.isValid()) 
         return `${lecture.start.format('HH:mm')} ~ ${lecture.end.format('HH:mm')}`
       else 
         return (lecture.idx) ? '오늘도 수고했어!' : '오늘도 화이팅!'
