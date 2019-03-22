@@ -17,6 +17,7 @@ export default {
   
   created () {
     this.getDimibob()
+    this.getTimetable()
   },
 
   data () {
@@ -27,15 +28,29 @@ export default {
         dinner: '저녁 급식 정보를 불러올 수 없습니다.',
         music: '기상송 정보를 불러올 수 없습니다.'
       },
+      current: [
+        { idx: 0, subject: '' },
+        { idx: 1, subject: '' },
+        { idx: 2, subject: '' }
+      ],
       table,
       time
     }
   },
 
   computed: {
-    today () {
-      
+    todayIndex () {
+      return this.moment().day() - 1
     },
+
+    timeIndex () {
+      const current = Number(this.moment().format('HHmm'))
+      const idx = time.table.findIndex(base => {
+        return current < base
+      })
+      return idx == -1 ? time.table.length - 1 : idx
+    },
+
     mealIndex () {
       const current = Number(this.moment().format('HHmm'))
       const idx = time.meal.findIndex(base => {
@@ -43,9 +58,10 @@ export default {
       })
       return idx == -1 ? time.meal.length - 1 : idx
     },
+
     dimibobTitle () {
       return ['BREAKFAST', 'LUNCH', 'DINNER', 'MUSIC'][this.mealIndex]
-    },
+    }
   },
 
   methods: {
@@ -57,6 +73,17 @@ export default {
           this.dimibob.lunch = res.data.lunch
           this.dimibob.dinner = res.data.dinner
         })
+    },
+
+    getTimetable () {
+      // const today = ['시작'].concat(this.table[this.grade][this.tab][this.todayIndex], ['끝'])
+      const today = this.table[this.grade][this.tab][this.todayIndex]
+      for (let i = -1; i < 2; i++) {
+        this.current.splice(i + 1, 1, {
+          idx: this.timeIndex + i + 1,
+          subject: today[this.timeIndex + i]
+        })
+      }
     }
   }
 }
@@ -65,33 +92,16 @@ export default {
 <template>
   <div class="content">
     <div class="table">
-      <div class="time">
-        <div class="time__subject">
-          <div class="time__subject__title">음악</div>
-          <div class="time__subject__time">제 1교시</div>
+      <div 
+        class="time" v-for="(lecture, key) in current" :key="idx"
+        :class="{ current: (key == 1) }"
+      >
+        <div class="time__subject" :class="{ current: (key == 1) }">
+          <div class="time__subject__title">{{ lecture.subject }}</div>
+          <div class="time__subject__time">제 {{ lecture.idx }}교시</div>
         </div>
-        <div class="time__desc">
+        <div class="time__desc" :class="{ current: (key == 1) }">
           <span class="time__desc__running">09:00 ~ 09:50</span>
-          <span class="time__desc__teacher">이택주 T</span>
-        </div>
-      </div>
-      <div class="time current">
-        <div class="time__subject current">
-          <div class="time__subject__title ">음악</div>
-          <div class="time__subject__time">제 2교시</div>
-        </div>
-        <div class="time__desc current">
-          <span class="time__desc__running">10:00 ~ 10:50</span>
-          <span class="time__desc__teacher">이택주 T</span>
-        </div>
-      </div>
-      <div class="time">
-        <div class="time__subject">
-          <div class="time__subject__title">음악</div>
-          <div class="time__subject__time">제 3교시</div>
-        </div>
-        <div class="time__desc">
-          <span class="time__desc__running">11:00 ~ 11:50</span>
           <span class="time__desc__teacher">이택주 T</span>
         </div>
       </div>
