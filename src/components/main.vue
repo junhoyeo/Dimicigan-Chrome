@@ -69,9 +69,9 @@ export default {
       const today = this.moment().format('YYYYMMDD')
       this.$api.get(`https://dev-api.dimigo.in/dimibobs/${today}`)
         .then((res) => {
-          this.dimibob.breakfast = res.data.breakfast
-          this.dimibob.lunch = res.data.lunch
-          this.dimibob.dinner = res.data.dinner
+          this.dimibob.breakfast = res.data.breakfast || '아침 급식 정보를 불러올 수 없습니다.'
+          this.dimibob.lunch = res.data.lunch || '점심 급식 정보를 불러올 수 없습니다.'
+          this.dimibob.dinner = res.data.dinner || '저녁 급식 정보를 불러올 수 없습니다.'
         })
     },
 
