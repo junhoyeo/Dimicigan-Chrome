@@ -177,6 +177,7 @@ export default {
 
   &__content {
     font-family: 'Gothic A1', sans-serif;
+    font-size: 1.5em;
   }
 }
 </style>
