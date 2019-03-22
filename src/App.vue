@@ -1,6 +1,6 @@
 <script>
-import Index from './components/Index'
-import Settings from './components/Settings'
+import Index from './pages/Index'
+import Settings from './pages/Settings'
 
 export default {
   name: 'App',

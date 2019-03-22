@@ -3,6 +3,7 @@ import axios from 'axios'
 import moment from 'moment'
 
 import App from './App.vue'
+import './assets/style.css'
 
 Vue.prototype.$api = axios
 Vue.prototype.moment = moment
