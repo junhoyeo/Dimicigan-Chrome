@@ -28,11 +28,7 @@ export default {
         dinner: '저녁 급식 정보를 불러올 수 없습니다.',
         music: '기상송 정보를 불러올 수 없습니다.'
       },
-      current: [
-        { idx: 0, subject: '' },
-        { idx: 1, subject: '' },
-        { idx: 2, subject: '' }
-      ],
+      current: [ {}, {}, {} ],
       table,
       time
     }
@@ -48,7 +44,7 @@ export default {
       const idx = time.table.findIndex(base => {
         return current < base
       })
-      return idx == -1 ? time.table.length - 1 : idx
+      return idx == -1 ? time.table.length : idx + 1
     },
 
     mealIndex () {
@@ -76,14 +72,25 @@ export default {
     },
 
     getTimetable () {
-      // const today = ['시작'].concat(this.table[this.grade][this.tab][this.todayIndex], ['끝'])
-      const today = this.table[this.grade][this.tab][this.todayIndex]
+      const today = ['시작'].concat(this.table[this.grade][this.tab][this.todayIndex], ['끝'])
       for (let i = -1; i < 2; i++) {
         this.current.splice(i + 1, 1, {
           idx: this.timeIndex + i + 1,
-          subject: today[this.timeIndex + i]
+          subject: today[this.timeIndex + i],
+          start: this.moment(
+              this.time.table[this.timeIndex + i - 1], 
+              'HHmm'
+            ).subtract(50, 'minutes'),
+          end: this.moment(this.time.table[this.timeIndex + i - 1], 'HHmm')
         })
       }
+    },
+    
+    getTimePeriod(lecture) {
+      if (lecture.start.isValid()) 
+        return `${lecture.start.format('HH:mm')} ~ ${lecture.end.format('HH:mm')}`
+      else 
+        return (lecture.idx) ? '오늘도 수고했어!' : '오늘도 화이팅!'
     }
   }
 }
@@ -93,7 +100,7 @@ export default {
   <div class="content">
     <div class="table">
       <div 
-        class="time" v-for="(lecture, key) in current" :key="idx"
+        class="time" v-for="(lecture, key) in current" :key="key"
         :class="{ current: (key == 1) }"
       >
         <div class="time__subject" :class="{ current: (key == 1) }">
@@ -101,7 +108,7 @@ export default {
           <div class="time__subject__time">제 {{ lecture.idx }}교시</div>
         </div>
         <div class="time__desc" :class="{ current: (key == 1) }">
-          <span class="time__desc__running">09:00 ~ 09:50</span>
+          <span class="time__desc__running">{{ getTimePeriod(lecture) }}</span>
           <span class="time__desc__teacher">이택주 T</span>
         </div>
       </div>
