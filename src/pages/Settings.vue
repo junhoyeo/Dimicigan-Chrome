@@ -54,11 +54,6 @@ export default {
 </template>
 
 <style lang="scss" scoped>
-.settings {
-  width: 100%;
-  display: table;
-}
-
 .title {
   font-size: 3em;
   font-family: 'Black Han Sans', sans-serif;

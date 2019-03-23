@@ -63,16 +63,16 @@ export default {
         <div class="header__info__next">다음 수업 15분 뒤</div>
       </div>
     </div>
-    <div class="settings" v-if="page === 1">
+    <div class="page settings" v-if="page === 1">
       <Settings :grade="grade" :tab="tab" @updated="updateSettings"/>
     </div>
-    <div class="weekly" v-else-if="page === 2">
+    <div class="page weekly" v-else-if="page === 2">
       <Week/>
     </div>
-    <div class="alarm" v-else-if="page === 3">
+    <div class="page alarm" v-else-if="page === 3">
       <Alarm/>
     </div>
-    <div class="main" v-else>
+    <div class="page main" v-else>
       <Index :grade="grade" :tab="tab"/>
     </div>
 
@@ -128,6 +128,11 @@ body {
       font-size: 1.6em;
     }
   }
+}
+
+.page {
+  display: table;
+  width: 100%;
 }
 
 .footer {
