@@ -1,12 +1,16 @@
 <script>
 import Index from './pages/Index'
 import Settings from './pages/Settings'
+import Alarm from './pages/Alarm'
+import Week from './pages/Week'
 
 export default {
   name: 'App',
   components: {
     Index, 
-    Settings
+    Settings,
+    Alarm,
+    Week
   },
 
   created () {
@@ -24,13 +28,13 @@ export default {
       today: new Date().getDay() - 1,
       grade: 1,
       tab: 1, // class
-      settings: false
+      page: 0 // [Index, Settings, Week, Alarm]
     }
   },
 
   methods: {
-    openSettings: function () {
-      this.settings = !(this.settings)
+    openPage: function (idx) {
+      this.page = idx
     },
 
     updateSettings: function (res) {
@@ -38,6 +42,7 @@ export default {
       this.tab = res.tab
       window.localStorage.setItem('grade', this.grade)
       window.localStorage.setItem('tab', this.tab)
+      this.settings = false
     }
   }
 }
@@ -47,10 +52,10 @@ export default {
   <div id="app">
     <div class="header">
       <div class="header__buttons">
-        <i class="fas fa-arrow-left fa-4x" @click="openSettings" v-if="settings"></i>
-        <i class="fas fa-cog fa-4x" @click="openSettings" v-else></i>
-        <i class="fas fa-calendar fa-4x"></i>
-        <i class="fas fa-exclamation-triangle fa-4x"></i>
+        <i class="fas fa-arrow-left fa-4x" @click="openPage(0)" v-if="page"></i>
+        <i class="fas fa-cog fa-4x" @click="openPage(1)" v-if="page !== 1"></i>
+        <i class="fas fa-calendar fa-4x" @click="openPage(2)" v-if="page !== 2"></i>
+        <i class="fas fa-exclamation-triangle fa-4x" @click="openPage(3)" v-if="page !== 3"></i>
       </div>
       <div class="header__info">
         <div class="header__info__date">{{ this.moment().format('YYYY년 M월 D일') }}</div>
@@ -58,8 +63,14 @@ export default {
         <div class="header__info__next">다음 수업 15분 뒤</div>
       </div>
     </div>
-    <div class="settings" v-if="settings">
+    <div class="settings" v-if="page === 1">
       <Settings :grade="grade" :tab="tab" @updated="updateSettings"/>
+    </div>
+    <div class="weekly" v-else-if="page === 2">
+      <Week/>
+    </div>
+    <div class="alarm" v-else-if="page === 3">
+      <Alarm/>
     </div>
     <div class="main" v-else>
       <Index :grade="grade" :tab="tab"/>
