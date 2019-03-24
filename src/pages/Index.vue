@@ -72,10 +72,19 @@ export default {
     },
 
     getTimetable () {
-      const today = ['시작'].concat(
-          ([5, 6].indexOf(this.todayIndex) > -1) ? 
-            '주말' : this.table[this.grade][this.tab][this.todayIndex], 
-        ['끝'])
+      if ([-1, 5].indexOf(this.todayIndex) > -1) {
+        const today = ['시작', '주말', '끝']
+        for (let i = 0; i < 3; i++) {
+          this.current.splice(i, 1, {
+            idx: i,
+            subject: today[i],
+            start: true,
+            end: true 
+          })
+        }
+        return
+      }
+      const today = ['시작'].concat(this.table[this.grade][this.tab][this.todayIndex], ['끝'])
       for (let i = -1; i < 2; i++) {
         this.current.splice(i + 1, 1, {
           idx: this.timeIndex + i,
@@ -90,7 +99,7 @@ export default {
     },
     
     getTimePeriod(lecture) {
-      if ([5, 6].indexOf(this.todayIndex) > -1) {
+      if ([-1, 5].indexOf(this.todayIndex) > -1) {
         return '신나는 주말!'
       }
       else if (lecture.start.isValid()) 
