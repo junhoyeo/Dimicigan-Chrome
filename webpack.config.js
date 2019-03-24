@@ -1,6 +1,6 @@
 var path = require('path')
 var webpack = require('webpack')
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const TerserPlugin = require('terser-webpack-plugin')
 
 module.exports = {
   entry: './src/main.js',
@@ -96,15 +96,7 @@ if (process.env.NODE_ENV === 'production') {
         NODE_ENV: '"production"'
       }
     }),
-    new UglifyJsPlugin({
-      uglifyOptions: {
-        warnings: false,
-        ie8: false,
-        output: {
-          comments: false
-        }
-      }
-    }),
+    new TerserPlugin(),
     new webpack.LoaderOptionsPlugin({
       minimize: true
     })

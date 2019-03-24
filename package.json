@@ -13,6 +13,7 @@
     "axios": "^0.18.0",
     "cox-postposition": "^1.2.0",
     "moment": "^2.24.0",
+    "terser-webpack-plugin": "^1.2.3",
     "vue": "^2.5.11"
   },
   "browserslist": [
