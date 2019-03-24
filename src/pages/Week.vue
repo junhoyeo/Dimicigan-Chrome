@@ -1,6 +1,7 @@
 <script>
 import SubjectData from './../components/SubjectData'
 import table from './../assets/table.json'
+import postposition from 'cox-postposition'
 
 export default {
   name: 'Week',
@@ -28,6 +29,20 @@ export default {
   computed: {
     today () {
       return new Date().getDay() - 1
+    },
+
+    helpText () {
+      if (!this.query)
+        return '일주일 시간표를 확인할 수 있어요.'
+      else {
+        let num = 0
+        this.table[this.grade][this.tab].forEach(day => {
+          num += day.filter(subject => { 
+            return (subject == this.query)
+          }).length
+        })
+        return postposition.parse(`${this.query}[는|은] 한 주에 ${num}번 들었어요.`)
+      }
     }
   },
 
@@ -42,7 +57,7 @@ export default {
 <template>
   <div class="content">
     <div class="title">주간 시간표</div>
-    <div class="help">일주일 시간표를 확인할 수 있어요.</div>
+    <div class="help">{{ helpText }}</div>
     <table>
       <tbody>
         <tr v-for="time in [0, 1, 2, 3, 4, 5, 6]">
