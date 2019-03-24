@@ -25,7 +25,7 @@ export default {
   
   data () {
     return {
-      today: new Date().getDay() - 1,
+      today: this.moment().day() - 1,
       grade: 1,
       tab: 1, // class
       page: 2 // [Index, Settings, Week, Alarm]

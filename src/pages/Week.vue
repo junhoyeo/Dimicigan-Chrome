@@ -28,7 +28,7 @@ export default {
 
   computed: {
     today () {
-      return new Date().getDay() - 1
+      return this.moment().day() - 1
     },
 
     helpText () {
