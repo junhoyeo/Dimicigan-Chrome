@@ -28,7 +28,7 @@ export default {
       today: new Date().getDay() - 1,
       grade: 1,
       tab: 1, // class
-      page: 0 // [Index, Settings, Week, Alarm]
+      page: 2 // [Index, Settings, Week, Alarm]
     }
   },
 
@@ -38,7 +38,7 @@ export default {
     },
 
     updateSettings: function (res) {
-      this.grade = res.grade,
+      this.grade = res.grade
       this.tab = res.tab
       window.localStorage.setItem('grade', this.grade)
       window.localStorage.setItem('tab', this.tab)
@@ -60,14 +60,14 @@ export default {
       <div class="header__info">
         <div class="header__info__date">{{ this.moment().format('YYYY년 M월 D일') }}</div>
         <div class="header__info__class">{{ `${grade}학년 ${tab}반` }}</div>
-        <div class="header__info__next">다음 수업 15분 뒤</div>
+        <div class="header__info__next">다음 수업 n분 뒤</div>
       </div>
     </div>
     <div class="page settings" v-if="page === 1">
       <Settings :grade="grade" :tab="tab" @updated="updateSettings"/>
     </div>
     <div class="page weekly" v-else-if="page === 2">
-      <Week/>
+      <Week :grade="grade" :tab="tab"/>
     </div>
     <div class="page alarm" v-else-if="page === 3">
       <Alarm/>

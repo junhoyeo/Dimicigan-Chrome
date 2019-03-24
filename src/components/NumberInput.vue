@@ -7,7 +7,7 @@ export default {
       default: 1
     },
     max : {
-      type: Number,
+      type: String,
       default: 1
     }
   },
