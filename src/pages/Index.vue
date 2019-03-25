@@ -36,13 +36,17 @@ export default {
 
     timeIndex() {
       const current = Number(this.moment().format('HHmm'));
-      const idx = time.table.findIndex(base => current < base);
+      const idx = time.table.findIndex(base => {
+        return current < base
+      });
       return idx === -1 ? time.table.length : idx + 1;
     },
 
     mealIndex() {
       const current = Number(this.moment().format('HHmm'));
-      const idx = time.meal.findIndex(base => current < base);
+      const idx = time.meal.findIndex(base => {
+        return current < base
+      });
       return idx === -1 ? time.meal.length - 1 : idx;
     },
 
