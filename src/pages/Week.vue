@@ -60,9 +60,9 @@ export default {
     <div class="help">{{ helpText }}</div>
     <table>
       <tbody>
-        <tr v-for="time in [0, 1, 2, 3, 4, 5, 6]">
+        <tr v-for="(_, time) in 7">
           <SubjectData
-            v-for="day in [0, 1, 2, 3, 4]" :key="day"
+            v-for="(_, day) in 5" :key="day"
             :name="table[grade][tab][day][time]"
             :query="query" :day="day" :today="today"
             @query="updateQuery"
