@@ -1,54 +1,70 @@
 <script>
-import NumberInput from './../components/NumberInput'
+import NumberInput from '../components/NumberInput';
 
 export default {
   name: 'Settings',
+  components: {
+    NumberInput,
+  },
   props: {
     grade: {
       type: Number,
-      default: 1
+      default: 1,
     },
     tab: {
       type: Number,
-      default: 1
-    }
-  },
-  components: {
-    NumberInput
+      default: 1,
+    },
   },
 
-  data () {
+  data() {
     return {
       newGrade: this.grade,
-      newTab: this.tab
-    }
+      newTab: this.tab,
+    };
   },
 
   methods: {
-    onClickUpdate: function () {
+    onClickUpdate() {
       this.$emit('updated', {
         grade: this.newGrade,
-        tab: this.newTab
-      })
-    }
-  }
-}
+        tab: this.newTab,
+      });
+    },
+  },
+};
 </script>
 
 <template>
   <div class="content">
     <div class="settings">
-      <div class="title">설정</div>
+      <div class="title">
+        설정
+      </div>
       <div class="info">
-        <div class="info__title">학년/반 정보 설정</div>
-        <NumberInput v-model="newGrade" type="number" max="3"/>
+        <div class="info__title">
+          학년/반 정보 설정
+        </div>
+        <NumberInput
+          v-model="newGrade"
+          type="number"
+          max="3"
+        />
         <span class="info__label grade">학년</span>
-        <NumberInput v-model="newTab" max="6"/>
+        <NumberInput
+          v-model="newTab"
+          max="6"
+        />
         <span class="info__label class">반</span>
       </div>
     </div>
     <div class="button-wrap">
-      <button class="button-update" @click="onClickUpdate">변경사항 저장</button>
+      <button
+        class="button-update"
+        @click="onClickUpdate"
+      >
+        변경사항 저장
+      </button>
     </div>
   </div>
 </template>

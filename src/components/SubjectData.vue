@@ -3,41 +3,41 @@ export default {
   props: {
     name: {
       type: String,
-      default: ''
+      default: '',
     },
     query: {
       type: String,
-      default: ''
+      default: '',
     },
     day: {
       type: Number,
-      default: 0
+      default: 0,
     },
     today: {
       type: Number,
-      default: 0
-    }
+      default: 0,
+    },
   },
 
   computed: {
-    computedClass () {
+    computedClass() {
       return {
         current: (this.today === this.day),
-        search: (this.query && this.query === this.name)
-      }
-    }
+        search: (this.query && this.query === this.name),
+      };
+    },
   },
 
   methods: {
-    updateQuery: function () {
-      this.$emit('query', this.name)
-    }
-  }
-}
+    updateQuery() {
+      this.$emit('query', this.name);
+    },
+  },
+};
 </script>
 
 <template>
-  <td 
+  <td
     :class="computedClass"
     @click="updateQuery"
   >

@@ -1,13 +1,17 @@
 <script>
 export default {
-  name: 'Alarm'
-}
+  name: 'Alarm',
+};
 </script>
 
 <template>
   <div class="content">
-    <div class="title">알람</div>
-    <div class="help">서비스 준비중입니다.</div>
+    <div class="title">
+      알람
+    </div>
+    <div class="help">
+      서비스 준비중입니다.
+    </div>
   </div>
 </template>
 
