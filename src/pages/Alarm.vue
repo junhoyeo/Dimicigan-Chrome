@@ -17,13 +17,13 @@ export default {
 
 <style lang="scss" scoped>
 .title {
-  font-size: 3em;
   font-family: 'Black Han Sans', sans-serif;
+  font-size: 3em;
 }
 
 .help {
+  margin-bottom: 0.5em;
   font-family: 'Gothic A1', sans-serif;
   font-size: 1.8em;
-  margin-bottom: 0.5em;
 }
 </style>

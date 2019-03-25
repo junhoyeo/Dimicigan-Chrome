@@ -8,7 +8,7 @@ export default {
     },
     max: {
       type: String,
-      default: 1,
+      default: '1',
     },
   },
 
@@ -41,9 +41,9 @@ export default {
 
 <style lang="scss" scoped>
 input {
-  font-size: 2.5em;
   width: 1.2em;
-  border: 3.5px solid black;
+  border: 3.5px solid #000;
+  font-size: 2.5em;
 }
 
 input:focus {

@@ -1,8 +1,8 @@
 <script>
-import Index from './pages/Index';
-import Settings from './pages/Settings';
-import Alarm from './pages/Alarm';
-import Week from './pages/Week';
+import Index from './pages/Index.vue';
+import Settings from './pages/Settings.vue';
+import Alarm from './pages/Alarm.vue';
+import Week from './pages/Week.vue';
 
 export default {
   name: 'App',
@@ -75,7 +75,7 @@ export default {
       </div>
       <div class="header__info">
         <div class="header__info__date">
-          {{ this.moment().format('YYYY년 M월 D일') }}
+          {{ moment().format('YYYY년 M월 D일') }}
         </div>
         <div class="header__info__class">
           {{ `${grade}학년 ${tab}반` }}
@@ -148,16 +148,16 @@ body {
   }
 
   &__buttons {
-    float: left;
     margin: 1em;
-    margin-left: 0;
     margin-top: 2em;
+    margin-left: 0;
+    float: left;
   }
 
   &__info {
+    padding: 1em;
     float: right;
     font-family: 'Black Han Sans', sans-serif;
-    padding: 1em;
     text-align: right;
 
     &__date {
@@ -181,23 +181,23 @@ body {
 
 .footer {
   position: absolute;
-  left: 0;
   bottom: 0;
-  background-color: black;
+  left: 0;
   width: 100%;
+  background-color: #000;
   text-align: center;
 
   &__logo {
     margin: 2em;
 
     img {
-      height: 30%;
       width: 15%;
+      height: 30%;
     }
 
     span {
       display: block;
-      color: white;
+      color: #fff;
       font-family: 'Gothic A1', sans-serif;
       font-size: 80%;
     }

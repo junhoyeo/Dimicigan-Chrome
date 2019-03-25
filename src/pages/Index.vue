@@ -37,13 +37,13 @@ export default {
     timeIndex() {
       const current = Number(this.moment().format('HHmm'));
       const idx = time.table.findIndex(base => current < base);
-      return idx == -1 ? time.table.length : idx + 1;
+      return idx === -1 ? time.table.length : idx + 1;
     },
 
     mealIndex() {
       const current = Number(this.moment().format('HHmm'));
       const idx = time.meal.findIndex(base => current < base);
-      return idx == -1 ? time.meal.length - 1 : idx;
+      return idx === -1 ? time.meal.length - 1 : idx;
     },
 
     dimibobTitle() {
@@ -70,7 +70,7 @@ export default {
     getTimetable() {
       if ([-1, 5].indexOf(this.todayIndex) > -1) {
         const today = ['시작', '주말', '끝'];
-        for (let i = 0; i < 3; i++) {
+        for (let i = 0; i < 3; i += 1) {
           this.current.splice(i, 1, {
             idx: i,
             subject: today[i],
@@ -81,7 +81,7 @@ export default {
         return;
       }
       const today = ['시작'].concat(this.table[this.grade][this.tab][this.todayIndex], ['끝']);
-      for (let i = -1; i < 2; i++) {
+      for (let i = -1; i < 2; i += 1) {
         this.current.splice(i + 1, 1, {
           idx: this.timeIndex + i,
           subject: today[this.timeIndex + i],
@@ -148,64 +148,64 @@ export default {
 
 <style lang="scss" scoped>
 .table {
-  width: 100%;
   display: table;
+  width: 100%;
 
   .time {
-    width: 100%;
     display: table-row;
+    width: 100%;
 
     &__subject {
+      display: table-cell;
       width: 30%;
       padding: 0.5em;
-      text-align: center;
-      display: table-cell;
-      color: white;
-      background-color: rgb(236, 236, 236);
       padding: 1em;
+      background-color: rgb(236, 236, 236);
+      color: #fff;
+      text-align: center;
 
       &__title {
-        font-size: 3em;
         font-family: 'Black Han Sans', sans-serif;
+        font-size: 3em;
       }
 
       &__time {
-        font-size: 1.5em;
         font-family: 'Gothic A1', sans-serif;
+        font-size: 1.5em;
       }
     }
 
     &__desc {
-      width: 70%;
       display: table-cell;
-      color: lightgray;
+      width: 70%;
       background-color: rgb(170, 170, 170);
+      color: rgb(211, 211, 211);
       font-family: 'Black Han Sans', sans-serif;
       font-size: 1.7em;
 
       span {
-        margin-top: -.8em;
-        margin-left: 0.5em;
-        margin-bottom: 0.5em;
         display: block;
+        margin-top: -0.8em;
+        margin-bottom: 0.5em;
+        margin-left: 0.5em;
       }
     }
 
     &__subject.current {
-      color: white;
-      background-color: black;
-      border: 3px solid black;
+      border: 3px solid #000;
+      background-color: #000;
+      color: #fff;
     }
 
     &__desc.current {
-      color: black;
+      border: 5px solid #000;
       background-color: #fb5656;
-      border: 5px solid black;
+      color: #000;
     }
   }
 
   .time.current {
-    border: 5px solid black;
+    border: 5px solid #000;
   }
 }
 

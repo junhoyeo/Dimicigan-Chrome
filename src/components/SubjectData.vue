@@ -47,21 +47,21 @@ export default {
 
 <style lang="scss" scoped>
 td {
-  color: rgb(150, 150, 150);
   width: 20%;
-  border: 2px solid black;
-  text-align: center;
-  font-size: 1.5em;
+  border: 2px solid #000;
   background-color: rgb(243, 243, 243);
+  color: rgb(150, 150, 150);
+  font-size: 1.5em;
+  text-align: center;
 }
 
-td.current {
-  color: rgb(133, 46, 46);
+.current {
   background-color: #f38383;
+  color: rgb(133, 46, 46);
 }
 
-td.search {
-  color: black;
+.search {
   background-color: #f5e78d;
+  color: #000;
 }
 </style>
