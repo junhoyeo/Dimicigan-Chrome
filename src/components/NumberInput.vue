@@ -4,43 +4,46 @@ export default {
   props: {
     value: {
       type: Number,
-      default: 1
+      default: 1,
     },
-    max : {
+    max: {
       type: String,
-      default: 1
-    }
+      default: '1',
+    },
   },
 
-  data () {
+  data() {
     return {
-      innerValue: this.value
-    }
+      innerValue: this.value,
+    };
   },
 
   watch: {
-    innerValue (val) {
-      this.$emit('input', val)
+    innerValue(val) {
+      this.$emit('input', val);
     },
-    value (val) {
-      this.innerValue = val
-    }
-  }
-}
+    value(val) {
+      this.innerValue = val;
+    },
+  },
+};
 </script>
 
 <template>
-  <input 
-    class="input" v-model.number="innerValue"
-    type="number" min="1" :max="max"
-  />
+  <input
+    v-model.number="innerValue"
+    class="input"
+    type="number"
+    min="1"
+    :max="max"
+  >
 </template>
 
 <style lang="scss" scoped>
 input {
-  font-size: 2.5em;
   width: 1.2em;
-  border: 3.5px solid black;
+  border: 3.5px solid #000;
+  font-size: 2.5em;
 }
 
 input:focus {

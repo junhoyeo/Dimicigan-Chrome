@@ -1,6 +1,7 @@
-var path = require('path')
-var webpack = require('webpack')
+const path = require('path')
+const webpack = require('webpack')
 const TerserPlugin = require('terser-webpack-plugin')
+const StylelintPlugin = require('stylelint-webpack-plugin')
 
 module.exports = {
   entry: './src/main.js',
@@ -91,6 +92,9 @@ if (process.env.NODE_ENV === 'production') {
   module.exports.devtool = '#source-map'
   // http://vue-loader.vuejs.org/en/workflow/production.html
   module.exports.plugins = (module.exports.plugins || []).concat([
+    new StylelintPlugin({
+      files: ['**/*.css', '**/*.scss', '**/*.vue']
+    }),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: '"production"'

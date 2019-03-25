@@ -1,84 +1,128 @@
 <script>
-import Index from './pages/Index'
-import Settings from './pages/Settings'
-import Alarm from './pages/Alarm'
-import Week from './pages/Week'
+import Index from './pages/Index.vue';
+import Settings from './pages/Settings.vue';
+import Alarm from './pages/Alarm.vue';
+import Week from './pages/Week.vue';
 
 export default {
   name: 'App',
   components: {
-    Index, 
+    Index,
     Settings,
     Alarm,
-    Week
+    Week,
   },
 
-  created () {
-    let prevGrade = Number(window.localStorage.grade)
-    let prevTab = Number(window.localStorage.tab)
-
-    if (prevGrade && prevTab) {
-      this.grade = prevGrade
-      this.tab = prevTab
-    }
-  },
-  
-  data () {
+  data() {
     return {
       today: this.moment().day() - 1,
       grade: 1,
       tab: 1, // class
       page: 0 // [Index, Settings, Week, Alarm]
+    };
+  },
+
+  created() {
+    const prevGrade = Number(window.localStorage.grade);
+    const prevTab = Number(window.localStorage.tab);
+
+    if (prevGrade && prevTab) {
+      this.grade = prevGrade;
+      this.tab = prevTab;
     }
   },
 
   methods: {
-    openPage: function (idx) {
-      this.page = idx
+    openPage(idx) {
+      this.page = idx;
     },
 
-    updateSettings: function (res) {
-      this.grade = res.grade
-      this.tab = res.tab
-      window.localStorage.setItem('grade', this.grade)
-      window.localStorage.setItem('tab', this.tab)
-      this.settings = false
-    }
-  }
-}
+    updateSettings(res) {
+      this.grade = res.grade;
+      this.tab = res.tab;
+      window.localStorage.setItem('grade', this.grade);
+      window.localStorage.setItem('tab', this.tab);
+      this.settings = false;
+    },
+  },
+};
 </script>
 
 <template>
   <div id="app">
     <div class="header">
       <div class="header__buttons">
-        <i class="fas fa-arrow-left fa-4x" @click="openPage(0)" v-if="page"></i>
-        <i class="fas fa-cog fa-4x" @click="openPage(1)" v-if="page !== 1"></i>
-        <i class="fas fa-calendar fa-4x" @click="openPage(2)" v-if="page !== 2"></i>
-        <i class="fas fa-exclamation-triangle fa-4x" @click="openPage(3)" v-if="page !== 3"></i>
+        <i
+          v-if="page"
+          class="fas fa-arrow-left fa-4x"
+          @click="openPage(0)"
+        />
+        <i
+          v-if="page !== 1"
+          class="fas fa-cog fa-4x"
+          @click="openPage(1)"
+        />
+        <i
+          v-if="page !== 2"
+          class="fas fa-calendar fa-4x"
+          @click="openPage(2)"
+        />
+        <i
+          v-if="page !== 3"
+          class="fas fa-exclamation-triangle fa-4x"
+          @click="openPage(3)"
+        />
       </div>
       <div class="header__info">
-        <div class="header__info__date">{{ this.moment().format('YYYY년 M월 D일') }}</div>
-        <div class="header__info__class">{{ `${grade}학년 ${tab}반` }}</div>
-        <div class="header__info__next">다음 수업 n분 뒤</div>
+        <div class="header__info__date">
+          {{ moment().format('YYYY년 M월 D일') }}
+        </div>
+        <div class="header__info__class">
+          {{ `${grade}학년 ${tab}반` }}
+        </div>
+        <div class="header__info__next">
+          다음 수업 n분 뒤
+        </div>
       </div>
     </div>
-    <div class="page settings" v-if="page === 1">
-      <Settings :grade="grade" :tab="tab" @updated="updateSettings"/>
+    <div
+      v-if="page === 1"
+      class="page settings"
+    >
+      <Settings
+        :grade="grade"
+        :tab="tab"
+        @updated="updateSettings"
+      />
     </div>
-    <div class="page weekly" v-else-if="page === 2">
-      <Week :grade="grade" :tab="tab"/>
+    <div
+      v-else-if="page === 2"
+      class="page weekly"
+    >
+      <Week
+        :grade="grade"
+        :tab="tab"
+      />
     </div>
-    <div class="page alarm" v-else-if="page === 3">
-      <Alarm/>
+    <div
+      v-else-if="page === 3"
+      class="page alarm"
+    >
+      <Alarm />
     </div>
-    <div class="page main" v-else>
-      <Index :grade="grade" :tab="tab"/>
+    <div
+      v-else
+      class="page main"
+    >
+      <Index
+        :grade="grade"
+        :tab="tab"
+      />
     </div>
 
     <div class="footer">
       <div class="footer__logo">
-        <img src="./assets/logo.png"/>
+        <img src="./assets/logo.png">
         <span>JunhoYeo @ JNJ 2019</span>
       </div>
     </div>
@@ -104,16 +148,16 @@ body {
   }
 
   &__buttons {
-    float: left;
     margin: 1em;
-    margin-left: 0;
     margin-top: 2em;
+    margin-left: 0;
+    float: left;
   }
 
   &__info {
+    padding: 1em;
     float: right;
     font-family: 'Black Han Sans', sans-serif;
-    padding: 1em;
     text-align: right;
 
     &__date {
@@ -137,23 +181,23 @@ body {
 
 .footer {
   position: absolute;
-  left: 0;
   bottom: 0;
-  background-color: black;
+  left: 0;
   width: 100%;
+  background-color: #000;
   text-align: center;
 
   &__logo {
     margin: 2em;
 
     img {
-      height: 30%;
       width: 15%;
+      height: 30%;
     }
 
     span {
       display: block;
-      color: white;
+      color: #fff;
       font-family: 'Gothic A1', sans-serif;
       font-size: 80%;
     }

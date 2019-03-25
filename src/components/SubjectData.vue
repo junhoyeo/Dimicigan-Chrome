@@ -3,41 +3,41 @@ export default {
   props: {
     name: {
       type: String,
-      default: ''
+      default: '',
     },
     query: {
       type: String,
-      default: ''
+      default: '',
     },
     day: {
       type: Number,
-      default: 0
+      default: 0,
     },
     today: {
       type: Number,
-      default: 0
-    }
+      default: 0,
+    },
   },
 
   computed: {
-    computedClass () {
+    computedClass() {
       return {
         current: (this.today === this.day),
-        search: (this.query && this.query === this.name)
-      }
-    }
+        search: (this.query && this.query === this.name),
+      };
+    },
   },
 
   methods: {
-    updateQuery: function () {
-      this.$emit('query', this.name)
-    }
-  }
-}
+    updateQuery() {
+      this.$emit('query', this.name);
+    },
+  },
+};
 </script>
 
 <template>
-  <td 
+  <td
     :class="computedClass"
     @click="updateQuery"
   >
@@ -47,21 +47,21 @@ export default {
 
 <style lang="scss" scoped>
 td {
-  color: rgb(150, 150, 150);
   width: 20%;
-  border: 2px solid black;
-  text-align: center;
-  font-size: 1.5em;
+  border: 2px solid #000;
   background-color: rgb(243, 243, 243);
+  color: rgb(150, 150, 150);
+  font-size: 1.5em;
+  text-align: center;
 }
 
-td.current {
-  color: rgb(133, 46, 46);
+.current {
   background-color: #f38383;
+  color: rgb(133, 46, 46);
 }
 
-td.search {
-  color: black;
+.search {
   background-color: #f5e78d;
+  color: #000;
 }
 </style>
