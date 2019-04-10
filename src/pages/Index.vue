@@ -35,9 +35,10 @@ export default {
     },
 
     timeIndex() {
+      const timeTable = (this.todayIndex === 2) ? this.time.table.slice(0, 6) : this.time.table
       const current = Number(this.moment().format('HHmm'));
-      const idx = time.table.findIndex(base => current < base);
-      return idx === -1 ? time.table.length : idx + 1;
+      const idx = timeTable.findIndex(base => current < base);
+      return idx === -1 ? timeTable.length : idx + 1;
     },
 
     mealIndex() {
@@ -68,7 +69,7 @@ export default {
     },
 
     getTimetable() {
-      if ([-1, 5].indexOf(this.todayIndex) > -1) {
+      if ([-1, 5].indexOf(this.todayIndex) > -1) { // weekends
         const today = ['시작', '주말', '끝'];
         today.foreach((item, idx) => {
           this.current.splice(idx, 1, {
