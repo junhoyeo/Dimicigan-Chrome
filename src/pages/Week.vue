@@ -32,7 +32,9 @@ export default {
     },
 
     helpText() {
-      if (!this.query) return '일주일 시간표를 확인할 수 있어요.';
+      if (!this.query) {
+        return '일주일 시간표를 확인할 수 있어요.';
+      }
 
       let num = 0;
       this.table[this.grade][this.tab].forEach((day) => {

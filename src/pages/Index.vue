@@ -36,17 +36,13 @@ export default {
 
     timeIndex() {
       const current = Number(this.moment().format('HHmm'));
-      const idx = time.table.findIndex(base => {
-        return current < base
-      });
+      const idx = time.table.findIndex(base => current < base);
       return idx === -1 ? time.table.length : idx + 1;
     },
 
     mealIndex() {
       const current = Number(this.moment().format('HHmm'));
-      const idx = time.meal.findIndex(base => {
-        return current < base
-      });
+      const idx = time.meal.findIndex(base => current < base);
       return idx === -1 ? time.meal.length - 1 : idx;
     },
 
@@ -74,15 +70,14 @@ export default {
     getTimetable() {
       if ([-1, 5].indexOf(this.todayIndex) > -1) {
         const today = ['시작', '주말', '끝'];
-        for (let i = 0; i < 3; i += 1) {
-          this.current.splice(i, 1, {
-            idx: i,
-            subject: today[i],
+        today.foreach((item, idx) => {
+          this.current.splice(idx, 1, {
+            idx,
+            subject: item,
             start: true,
             end: true,
           });
-        }
-        return;
+        });
       }
       const today = ['시작'].concat(this.table[this.grade][this.tab][this.todayIndex], ['끝']);
       for (let i = -1; i < 2; i += 1) {

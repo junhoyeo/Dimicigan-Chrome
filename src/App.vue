@@ -18,7 +18,7 @@ export default {
       today: this.moment().day() - 1,
       grade: 1,
       tab: 1, // class
-      page: 0 // [Index, Settings, Week, Alarm]
+      page: 0, // [Index, Settings, Week, Alarm]
     };
   },
 
