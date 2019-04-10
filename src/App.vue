@@ -22,6 +22,40 @@ export default {
     };
   },
 
+  computed: {
+    todayIndex() {
+      return this.moment().day() - 1;
+    },
+
+    isTuesday() {
+      return (this.todayIndex === 1);
+    },
+
+    buttonHref() {
+      return `https://dimigo.${(this.isTuesday) ? 'life' : 'in'}`;
+    },
+
+    buttonName() {
+      return (this.isTuesday) ? '디미고 라이프' : '디미고인';
+    },
+
+    buttonDesc() {
+      return (this.isTuesday) ? '오늘은 잔류 신청 하는 날!' : '당신의 삶을 액션빔, 디미고인';
+    },
+
+    footerColorStyle() {
+      return {
+        'color': (this.isTuesday) ? '#000' : '#fff',
+      }
+    },
+
+    footerBgStyle() {
+      return {
+        'background-color': (this.isTuesday) ? '#fb5656' : '#000',
+      };
+    },
+  },
+
   created() {
     const prevGrade = Number(window.localStorage.grade);
     const prevTab = Number(window.localStorage.tab);
@@ -120,10 +154,30 @@ export default {
       />
     </div>
 
-    <div class="footer">
+    <div
+      :style="footerBgStyle"
+      class="footer"
+    >
       <div class="footer__logo">
-        <img src="./assets/logo.png">
-        <span>JunhoYeo @ JNJ 2019</span>
+        <a
+          :href="buttonHref"
+          :style="footerColorStyle"
+          target="_blank"
+          class="button"
+        >
+          <i class="fas fa-school" /> {{ buttonName }}
+        </a>
+        <span
+          :style="footerColorStyle"
+          class="desc"
+        >
+          {{ buttonDesc }}
+        </span>
+        <span
+          :style="footerColorStyle"
+        >
+        @JunhoYeo
+        </span>
       </div>
     </div>
   </div>
@@ -184,22 +238,26 @@ body {
   bottom: 0;
   left: 0;
   width: 100%;
-  background-color: #000;
   text-align: center;
 
   &__logo {
-    margin: 2em;
+    margin: 1.2em;
 
-    img {
-      width: 15%;
-      height: 30%;
+    a {
+      display: block;
+      font-family: 'Black Han Sans', sans-serif;
+      font-size: 2.3em;
+      text-decoration: none;
     }
 
     span {
       display: block;
-      color: #fff;
       font-family: 'Gothic A1', sans-serif;
       font-size: 80%;
+    }
+
+    .desc {
+      font-size: 1.2em;
     }
   }
 }

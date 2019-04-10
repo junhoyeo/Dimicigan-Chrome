@@ -35,7 +35,7 @@ export default {
     },
 
     timeIndex() {
-      const timeTable = (this.todayIndex === 2) ? this.time.table.slice(0, 6) : this.time.table
+      const timeTable = (this.todayIndex === 2) ? this.time.table.slice(0, 6) : this.time.table;
       const current = Number(this.moment().format('HHmm'));
       const idx = timeTable.findIndex(base => current < base);
       return idx === -1 ? timeTable.length : idx + 1;
