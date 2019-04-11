@@ -45,8 +45,8 @@ export default {
 
     footerColorStyle() {
       return {
-        'color': (this.isTuesday) ? '#000' : '#fff',
-      }
+        color: (this.isTuesday) ? '#000' : '#fff',
+      };
     },
 
     footerBgStyle() {
@@ -176,7 +176,7 @@ export default {
         <span
           :style="footerColorStyle"
         >
-        @JunhoYeo
+          @JunhoYeo
         </span>
       </div>
     </div>
