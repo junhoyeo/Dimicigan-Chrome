@@ -1,5 +1,6 @@
 const path = require('path')
 const webpack = require('webpack')
+const { VueLoaderPlugin } = require('vue-loader')
 const TerserPlugin = require('terser-webpack-plugin')
 const StylelintPlugin = require('stylelint-webpack-plugin')
 
@@ -82,6 +83,9 @@ module.exports = {
     noInfo: true,
     overlay: true
   },
+  plugins: [
+    new VueLoaderPlugin()
+  ],
   performance: {
     hints: false
   },
