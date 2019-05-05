@@ -9,6 +9,8 @@
     "default_popup": "index.html"
   },
   "permissions": [
+    "notifications",
+    "alarms",
     "https://*/*"
   ]
 }

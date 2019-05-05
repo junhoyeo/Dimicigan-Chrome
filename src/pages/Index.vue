@@ -99,8 +99,28 @@ export default {
       if ([-1, 5].indexOf(this.todayIndex) > -1) {
         return '신나는 주말!';
       }
-      if (lecture.start.isValid()) { return `${lecture.start.format('HH:mm')} ~ ${lecture.end.format('HH:mm')}`; }
+      if (lecture.start.isValid()) { 
+        this.createAlarm(lecture)
+        return `${lecture.start.format('HH:mm')} ~ ${lecture.end.format('HH:mm')}`; 
+      }
       return (lecture.idx) ? '오늘도 수고했어!' : '오늘도 화이팅!';
+    },
+
+    createNotification(period, minute) {
+      chrome.notifications.clear('dimicigan');
+      chrome.notifications.create('dimicigan', {
+        iconUrl: './src/assets/logo.jpg',
+        type: 'basic',
+        title: `수업 시간 ${minute}분 전`,
+        message: `${period}교시 수업 시작까지 ${minute}분 남았어요!`,
+      });
+    },
+
+    createAlarm(lecture) {
+      chrome.alarms.create('dimicigan', {when: lecture.start.subtract(5, 'minutes').valueOf()});
+      chrome.alarms.onAlarm.addListener(function( alarm ) {
+        this.createNotification(lecture.idx, 5)
+      });
     },
   },
 };
