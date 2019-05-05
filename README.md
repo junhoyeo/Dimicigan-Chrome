@@ -18,6 +18,9 @@
 > `알람` 기능 역시 지원할 예정입니다.
 
 ## 설치
+
+![extensions](screenshots/install.png)
+
  1. [최신 릴리즈](https://github.com/junhoyeo/Dimicigan-Chrome/releases)의 zip 파일을 다운로드 받아 압축을 풉니다.
  2. [chrome://extensions/](chrome://extensions/)로 이동합니다.
  3. 상단 오른쪽에 있는 `개발자 모드` 스위치를 켭니다.
