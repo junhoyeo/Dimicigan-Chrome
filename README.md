@@ -19,7 +19,7 @@
 
 ## 설치
 
-![extensions](screenshots/install.png)
+<img alt="extensions" src="./screenshots/install.png" width="80%">
 
  1. [최신 릴리즈](https://github.com/junhoyeo/Dimicigan-Chrome/releases)의 zip 파일을 다운로드 받아 압축을 풉니다.
  2. [chrome://extensions/](chrome://extensions/)로 이동합니다.
