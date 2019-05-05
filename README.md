@@ -1,16 +1,18 @@
-# Dimicigan-Chrome
+# 디미시간(Dimicigan-Chrome)
 <img alt="cover" src="./screenshots/cover.png" width="70%">
 
+> 각 1학년 학급의 시간표를 쉽게 확인할 수 있는 크롬 익스텐션
+> 
 > Chrome extension for checking timetable about each class in [Dimigo](https://dimigo.hs.kr)
 
-<img src="./screenshots/index.png?v=2" width="35%"><img src="./screenshots/settings.png?v=2" width="35%">
+<img src="./screenshots/index.png?v=2" width="35%" style="border: 1px solid #d3d3d3;"><img src="./screenshots/settings.png?v=2" width="35%" style="border: 1px solid #d3d3d3;">
 > `설정`에서 정한 학년/반 정보를 이용해서 현재 시간에 맞는 `시간표 정보`를 가져옵니다.
 
-<img src="./screenshots/index-tue.png" width="35%">
+<img src="./screenshots/index-tue.png" width="35%" style="border: 1px solid #d3d3d3;">
 
 > 화요일은 `잔류 신청`을 위해 하단 푸터에 디미고 라이프 탭을 여는 링크를 표시합니다.
 
-<img src="./screenshots/weekly.png?v=2" width="35%"><img src="./screenshots/alarm.png?v=2" width="35%">
+<img src="./screenshots/weekly.png?v=2" width="35%" style="border: 1px solid #d3d3d3;"><img src="./screenshots/alarm.png?v=2" width="35%" style="border: 1px solid #d3d3d3;">
 > `주간 시간표`에서 학급의 일주일 시간표를 확인하고, 특정 과목이 언제 있는지를 쉽게 확인할 수 있습니다.
 > 
 > `알람` 기능 역시 지원할 예정입니다.
