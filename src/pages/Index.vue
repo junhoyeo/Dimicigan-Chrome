@@ -71,7 +71,7 @@ export default {
     getTimetable() {
       if ([-1, 5].indexOf(this.todayIndex) > -1) { // weekends
         const today = ['시작', '주말', '끝'];
-        today.foreach((item, idx) => {
+        today.forEach((item, idx) => {
           this.current.splice(idx, 1, {
             idx,
             subject: item,
@@ -79,6 +79,7 @@ export default {
             end: true,
           });
         });
+        return;
       }
       const today = ['시작'].concat(this.table[this.grade][this.tab][this.todayIndex], ['끝']);
       for (let i = -1; i < 2; i += 1) {
