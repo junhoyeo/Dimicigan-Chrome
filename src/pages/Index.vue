@@ -118,8 +118,8 @@ export default {
 
     createAlarm(lecture) {
       chrome.alarms.create('dimicigan', {when: lecture.start.subtract(5, 'minutes').valueOf()});
-      chrome.alarms.onAlarm.addListener(function( alarm ) {
-        this.createNotification(lecture.idx, 5)
+      chrome.alarms.onAlarm.addListener((alarm) => {
+        this.createNotification(lecture.idx, 5);
       });
     },
   },
