@@ -9,7 +9,9 @@
     "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
     "lint:vue": "eslint src/ --ext .vue --fix",
-    "lint:css": "stylelint \"**/*.{scss,vue}\" --fix"
+    "lint:css": "stylelint \"**/*.{scss,vue}\" --fix",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "dependencies": {
     "@babel/preset-env": "^7.4.4",
@@ -19,7 +21,8 @@
     "stylelint-config-idiomatic-order": "^7.0.0",
     "stylelint-config-sass-guidelines": "^6.0.0",
     "terser-webpack-plugin": "^1.2.3",
-    "vue": "^2.6.10"
+    "vue": "^2.6.10",
+    "snyk": "^1.161.1"
   },
   "browserslist": [
     "> 1%",
@@ -53,5 +56,6 @@
     "webpack": "^4.30.0",
     "webpack-cli": "^3.3.2",
     "webpack-dev-server": "^3.3.1"
-  }
+  },
+  "snyk": true
 }
