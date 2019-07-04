@@ -22,7 +22,7 @@
     "stylelint-config-sass-guidelines": "^6.0.0",
     "terser-webpack-plugin": "^1.2.3",
     "vue": "^2.6.10",
-    "snyk": "^1.161.1"
+    "snyk": "^1.189.0"
   },
   "browserslist": [
     "> 1%",
