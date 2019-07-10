@@ -8,6 +8,7 @@ import './assets/style.css';
 Vue.prototype.$api = axios;
 Vue.prototype.moment = moment;
 
+/* eslint-disable no-new */
 new Vue({
   el: '#app',
   render: h => h(App),

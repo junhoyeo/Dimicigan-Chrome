@@ -53,7 +53,15 @@ export default {
   },
 
   async created() {
-    await this.getDimibob();
+    try {
+      const dimibob = await JSON.parse(localStorage.dimibob);
+      if (dimibob.timestamp !== this.moment().format('YYYYMMDD')) {
+        throw Error();
+      }
+      this.dimibob = dimibob;
+    } catch (err) {
+      await this.getDimibob();
+    }
     this.getTimetable();
   },
 
@@ -61,10 +69,16 @@ export default {
     async getDimibob() {
       const today = this.moment().format('YYYYMMDD');
       const { data: { breakfast, lunch, dinner } } = await this.$api.get(`https://dev-api.dimigo.in/dimibobs/${today}`);
-      console.log(breakfast);
       this.dimibob.breakfast = breakfast || '아침 급식 정보가 없습니다.';
       this.dimibob.lunch = lunch || '점심 급식 정보가 없습니다.';
       this.dimibob.dinner = dinner || '저녁 급식 정보가 없습니다.';
+
+      localStorage.dimibob = JSON.stringify({
+        breakfast,
+        lunch,
+        dinner,
+        timestamp: this.moment().format('YYYYMMDD'),
+      });
     },
 
     getTimetable() {
