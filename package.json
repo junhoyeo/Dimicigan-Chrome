@@ -8,10 +8,8 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
-    "lint:vue": "eslint src/ --ext .vue --fix",
-    "lint:css": "stylelint \"**/*.{scss,vue}\" --fix",
-    "snyk-protect": "snyk protect",
-    "prepare": "npm run snyk-protect"
+    "lint:js": "eslint \"**/*.{vue,js}\" --fix",
+    "lint:css": "stylelint \"**/*.{scss,vue}\" --fix"
   },
   "dependencies": {
     "@babel/preset-env": "^7.4.4",
