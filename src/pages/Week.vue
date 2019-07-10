@@ -38,7 +38,7 @@ export default {
 
       let num = 0;
       this.table[this.grade][this.tab].forEach((day) => {
-        num += day.filter((subject) => (subject === this.query)).length;
+        num += day.filter(subject => (subject === this.query)).length;
       });
       return postposition.parse(`${this.query}[는|은] 한 주에 ${num}번 들었어요.`);
     },

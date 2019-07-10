@@ -37,13 +37,13 @@ export default {
     timeIndex() {
       const timeTable = (this.todayIndex === 2) ? this.time.table.slice(0, 6) : this.time.table;
       const current = Number(this.moment().format('HHmm'));
-      const idx = timeTable.findIndex((base) => current < base);
+      const idx = timeTable.findIndex(base => current < base);
       return idx === -1 ? timeTable.length : idx + 1;
     },
 
     mealIndex() {
       const current = Number(this.moment().format('HHmm'));
-      const idx = time.meal.findIndex((base) => current < base);
+      const idx = time.meal.findIndex(base => current < base);
       return idx === -1 ? time.meal.length - 1 : idx;
     },
 
@@ -52,20 +52,19 @@ export default {
     },
   },
 
-  created() {
-    this.getDimibob();
+  async created() {
+    await this.getDimibob();
     this.getTimetable();
   },
 
   methods: {
-    getDimibob() {
+    async getDimibob() {
       const today = this.moment().format('YYYYMMDD');
-      this.$api.get(`https://dev-api.dimigo.in/dimibobs/${today}`)
-        .then((res) => {
-          this.dimibob.breakfast = res.data.breakfast || '아침 급식 정보가 없습니다.';
-          this.dimibob.lunch = res.data.lunch || '점심 급식 정보가 없습니다.';
-          this.dimibob.dinner = res.data.dinner || '저녁 급식 정보가 없습니다.';
-        });
+      const { data: { breakfast, lunch, dinner } } = await this.$api.get(`https://dev-api.dimigo.in/dimibobs/${today}`);
+      console.log(breakfast);
+      this.dimibob.breakfast = breakfast || '아침 급식 정보가 없습니다.';
+      this.dimibob.lunch = lunch || '점심 급식 정보가 없습니다.';
+      this.dimibob.dinner = dinner || '저녁 급식 정보가 없습니다.';
     },
 
     getTimetable() {
